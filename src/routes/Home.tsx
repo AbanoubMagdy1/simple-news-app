@@ -2,6 +2,7 @@ import {useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import { newsGetAction } from '../actions/newsActions'
 import rootReducer from '../reducers'
+import NewsCard from '../components/NewsCard'
 
 function HomePage() {
   const {news, error, loading}= useSelector((state: ReturnType<typeof rootReducer>) => state.news)
@@ -17,9 +18,9 @@ function HomePage() {
   if(error) return (<div>{error}</div>)
 
   return (
-    <div>
-        {news?.articles && news.articles.map((item) => (
-            <p>{item.title}</p>
+    <div className='news-grid'>
+        {news?.articles && news.articles.map((item, idx) => (
+            <NewsCard key={idx} article={item}/>
         ))}
     </div>
   )

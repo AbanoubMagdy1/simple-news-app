@@ -1,10 +1,17 @@
 #root {
-  max-width: 1280px;
+  width: min(95%, 1000px);
   margin: 0 auto;
   padding: 1rem;
+}
+
+h1{
   text-align: center;
 }
 
-
+.news-grid{
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
 
 

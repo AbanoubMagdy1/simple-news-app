@@ -1,7 +1,8 @@
-interface Article {
+export interface Article {
     author: string;
     title: string;
     description: string;
+    urlToImage: string;
 }
 
 export interface News{
