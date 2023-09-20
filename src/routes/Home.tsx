@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import { newsGetAction } from '../actions/newsActions'
 import rootReducer from '../reducers'
 import NewsCard from '../components/NewsCard'
+import AsyncHandler from '../components/AsyncHandler'
 
 function HomePage() {
   const {news, error, loading}= useSelector((state: ReturnType<typeof rootReducer>) => state.news)
@@ -13,16 +14,14 @@ function HomePage() {
     if(!news) dispatch(newsGetAction() as any)
   }, [])
   
-  if(loading) return (<div>Loading...</div>)
-
-  if(error) return (<div>{error}</div>)
-
   return (
-    <div className='news-grid'>
-        {news?.articles && news.articles.map((item, idx) => (
-            <NewsCard key={idx} article={item}/>
-        ))}
-    </div>
+    <AsyncHandler error={error} loading={loading}>
+      <div className='news-grid'>
+          {news?.articles && news.articles.map((item, idx) => (
+              <NewsCard key={idx} article={item} idx={idx}/>
+          ))}
+      </div>
+    </AsyncHandler>
   )
 }
 
